@@ -6,204 +6,933 @@
 <meta name="theme-color" content="#ff6a00">
 <meta name="description" content="AnuCore — AI × Computer Science. Learn, build, debug, explore and create.">
 <title>AnuCore — AI × Computer Science</title>
+
 <style>
 :root{
-  --bg:#080808;--panel:#101010;--panel2:#151515;--text:#f7f2ec;--muted:#a9a19a;
-  --orange:#ff6a00;--orange2:#ff9b4a;--line:rgba(255,255,255,.09);
-  --glow:rgba(255,106,0,.28);--radius:24px;
+  --bg:#080808;
+  --panel:#101010;
+  --panel2:#151515;
+  --text:#f7f2ec;
+  --muted:#a9a19a;
+  --orange:#ff6a00;
+  --orange2:#ff9b4a;
+  --line:rgba(255,255,255,.09);
+  --glow:rgba(255,106,0,.28);
+  --radius:24px;
 }
-*{box-sizing:border-box} html{scroll-behavior:smooth}
-body{margin:0;background:
- radial-gradient(circle at 78% 8%,rgba(255,106,0,.15),transparent 27rem),
- radial-gradient(circle at 12% 32%,rgba(255,154,70,.06),transparent 25rem),var(--bg);
- color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.5}
-a{text-decoration:none;color:inherit}.wrap{width:min(1160px,92%);margin:auto}
-nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(8,8,8,.72);border-bottom:1px solid var(--line)}
-.nav{height:72px;display:flex;align-items:center;justify-content:space-between}
-.logo{font-size:21px;font-weight:900;letter-spacing:-.7px}.logo span{color:var(--orange)}
-.links{display:flex;gap:26px;color:#bdb6b0;font-size:14px}.links a:hover{color:white}
-.navbtn,.primary{border:0;border-radius:999px;background:var(--orange);color:#0b0806;font-weight:800;cursor:pointer}
-.navbtn{padding:11px 17px}.hero{padding:86px 0 54px;position:relative;overflow:hidden}
-.eyebrow{display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(255,106,0,.3);background:rgba(255,106,0,.07);color:#ffb178;border-radius:999px;padding:7px 12px;font-size:12px;font-weight:750}
-.dot{width:7px;height:7px;background:var(--orange);border-radius:50%;box-shadow:0 0 18px var(--orange)}
-h1{font-size:clamp(50px,8vw,92px);line-height:.95;letter-spacing:-5px;max-width:900px;margin:24px 0 20px}
-.gradient{background:linear-gradient(100deg,#fff 20%,#ff7a1a 72%,#ffb36f);-webkit-background-clip:text;color:transparent}
-.hero p{color:#aaa19a;max-width:650px;font-size:18px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0}
-.primary{padding:14px 21px;font-size:15px;box-shadow:0 0 40px rgba(255,106,0,.18)}
-.ghost{padding:13px 20px;border:1px solid var(--line);border-radius:999px;color:#ddd;background:#0d0d0d}
-.orb{position:absolute;right:-130px;top:40px;width:430px;height:430px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffb06d,transparent 14%,#ff6a00 38%,transparent 67%);filter:blur(2px);opacity:.25;pointer-events:none}
-.searchbox{margin-top:32px;background:rgba(16,16,16,.8);border:1px solid var(--line);border-radius:22px;padding:9px;display:flex;gap:8px;max-width:850px;box-shadow:0 20px 70px rgba(0,0,0,.35)}
-.searchbox input{flex:1;background:transparent;border:0;outline:0;color:white;font-size:15px;padding:14px}.searchbox button{padding:0 19px;border:0;border-radius:16px;background:#f4eee8;font-weight:800;cursor:pointer}
-section{padding:68px 0}.section-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:25px}.section-head h2{font-size:34px;letter-spacing:-1.7px;margin:0}.section-head p{color:var(--muted);max-width:520px;margin:0}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.card{background:linear-gradient(145deg,#121212,#0d0d0d);border:1px solid var(--line);border-radius:var(--radius);padding:20px;min-height:155px;transition:.25s;cursor:pointer}
-.card:hover{transform:translateY(-5px);border-color:rgba(255,106,0,.4);box-shadow:0 20px 60px rgba(255,106,0,.08)}
-.icon{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:rgba(255,106,0,.11);color:#ff914c;font-size:18px;margin-bottom:25px}
-.card h3{margin:0 0 5px;font-size:16px}.card p{margin:0;color:#8e8985;font-size:13px}
-.workspace{display:grid;grid-template-columns:250px 1fr;gap:14px;background:#0d0d0d;border:1px solid var(--line);border-radius:28px;padding:12px}
-.tools{padding:8px}.tool{width:100%;border:0;background:transparent;color:#aaa;text-align:left;padding:12px;border-radius:12px;cursor:pointer}.tool.active,.tool:hover{background:rgba(255,106,0,.11);color:#fff}
-.chat{background:#111;border:1px solid var(--line);border-radius:21px;min-height:430px;padding:25px;display:flex;flex-direction:column}
-.chat-top{display:flex;justify-content:space-between;color:#999;font-size:12px}.bubble{max-width:760px;margin-top:auto;padding:18px;border:1px solid var(--line);border-radius:18px;background:#151515}.bubble strong{color:#ff9a59}.chatinput{display:flex;gap:8px;margin-top:14px}.chatinput input{flex:1;background:#0a0a0a;border:1px solid var(--line);border-radius:14px;padding:13px;color:#fff;outline:0}.chatinput button{border:0;background:var(--orange);border-radius:14px;padding:0 18px;font-weight:800}
-.feature{display:grid;grid-template-columns:1fr 1fr;gap:14px}.featurebox{padding:30px;border:1px solid var(--line);border-radius:28px;background:linear-gradient(145deg,#15110e,#0e0e0e)}.featurebox h3{font-size:25px;margin:0 0 10px}.featurebox p{color:#999}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.chip{border:1px solid var(--line);border-radius:999px;padding:8px 11px;color:#c8c0ba;font-size:12px}
-.cta{text-align:center;padding:80px 20px;border:1px solid rgba(255,106,0,.22);border-radius:30px;background:radial-gradient(circle at 50% 0,rgba(255,106,0,.12),transparent 45%),#0e0e0e}
-.cta h2{font-size:42px;letter-spacing:-2px;margin:0 0 10px}.cta p{color:#999;margin:0 auto 22px;max-width:560px}
-footer{padding:35px 0 55px;color:#777;font-size:12px;display:flex;justify-content:space-between;border-top:1px solid var(--line)}
-#result{display:none;margin-top:12px;padding:18px;border:1px solid rgba(255,106,0,.25);background:#111;border-radius:18px;color:#ddd}
-@media(max-width:850px){.links{display:none}.grid{grid-template-columns:repeat(2,1fr)}.workspace{grid-template-columns:1fr}.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.tool{font-size:11px;text-align:center}.feature{grid-template-columns:1fr}h1{letter-spacing:-3px}}
-@media(max-width:520px){.grid{grid-template-columns:1fr}.hero{padding-top:55px}h1{font-size:52px}.searchbox button{padding:0 12px}.section-head{display:block}.section-head p{margin-top:8px}.tools{grid-template-columns:repeat(2,1fr)}footer{display:block}}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 78% 8%,rgba(255,106,0,.15),transparent 27rem),
+    radial-gradient(circle at 12% 32%,rgba(255,154,70,.06),transparent 25rem),
+    var(--bg);
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;
+  line-height:1.5
+}
+
+a{text-decoration:none;color:inherit}
+.wrap{width:min(1160px,92%);margin:auto}
+
+nav{
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(18px);
+  background:rgba(8,8,8,.72);
+  border-bottom:1px solid var(--line)
+}
+
+.nav{
+  height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between
+}
+
+.logo{
+  font-size:21px;
+  font-weight:900;
+  letter-spacing:-.7px
+}
+
+.logo span{color:var(--orange)}
+
+.links{
+  display:flex;
+  gap:26px;
+  color:#bdb6b0;
+  font-size:14px
+}
+
+.links a:hover{color:white}
+
+.navbtn,.primary{
+  border:0;
+  border-radius:999px;
+  background:var(--orange);
+  color:#0b0806;
+  font-weight:800;
+  cursor:pointer
+}
+
+.navbtn{padding:11px 17px}
+
+.hero{
+  padding:86px 0 54px;
+  position:relative;
+  overflow:hidden
+}
+
+.eyebrow{
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+  border:1px solid rgba(255,106,0,.3);
+  background:rgba(255,106,0,.07);
+  color:#ffb178;
+  border-radius:999px;
+  padding:7px 12px;
+  font-size:12px;
+  font-weight:750
+}
+
+.dot{
+  width:7px;
+  height:7px;
+  background:var(--orange);
+  border-radius:50%;
+  box-shadow:0 0 18px var(--orange)
+}
+
+h1{
+  font-size:clamp(50px,8vw,92px);
+  line-height:.95;
+  letter-spacing:-5px;
+  max-width:900px;
+  margin:24px 0 20px
+}
+
+.gradient{
+  background:linear-gradient(100deg,#fff 20%,#ff7a1a 72%,#ffb36f);
+  -webkit-background-clip:text;
+  color:transparent
+}
+
+.hero p{
+  color:#aaa19a;
+  max-width:650px;
+  font-size:18px
+}
+
+.hero-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin:28px 0
+}
+
+.primary{
+  padding:14px 21px;
+  font-size:15px;
+  box-shadow:0 0 40px rgba(255,106,0,.18)
+}
+
+.ghost{
+  padding:13px 20px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  color:#ddd;
+  background:#0d0d0d
+}
+
+.orb{
+  position:absolute;
+  right:-130px;
+  top:40px;
+  width:430px;
+  height:430px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 35% 30%,#ffb06d,transparent 14%,#ff6a00 38%,transparent 67%);
+  filter:blur(2px);
+  opacity:.25;
+  pointer-events:none
+}
+
+.searchbox{
+  margin-top:32px;
+  background:rgba(16,16,16,.8);
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:9px;
+  display:flex;
+  gap:8px;
+  max-width:850px;
+  box-shadow:0 20px 70px rgba(0,0,0,.35)
+}
+
+.searchbox input{
+  flex:1;
+  background:transparent;
+  border:0;
+  outline:0;
+  color:white;
+  font-size:15px;
+  padding:14px
+}
+
+.searchbox button{
+  padding:0 19px;
+  border:0;
+  border-radius:16px;
+  background:#f4eee8;
+  font-weight:800;
+  cursor:pointer
+}
+
+section{padding:68px 0}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:end;
+  margin-bottom:25px
+}
+
+.section-head h2{
+  font-size:34px;
+  letter-spacing:-1.7px;
+  margin:0
+}
+
+.section-head p{
+  color:var(--muted);
+  max-width:520px;
+  margin:0
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px
+}
+
+.card{
+  background:linear-gradient(145deg,#121212,#0d0d0d);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:20px;
+  min-height:155px;
+  transition:.25s;
+  cursor:pointer
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(255,106,0,.4);
+  box-shadow:0 20px 60px rgba(255,106,0,.08)
+}
+
+.icon{
+  width:40px;
+  height:40px;
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  background:rgba(255,106,0,.11);
+  color:#ff914c;
+  font-size:18px;
+  margin-bottom:25px
+}
+
+.card h3{
+  margin:0 0 5px;
+  font-size:16px
+}
+
+.card p{
+  margin:0;
+  color:#8e8985;
+  font-size:13px
+}
+
+.workspace{
+  display:grid;
+  grid-template-columns:250px 1fr;
+  gap:14px;
+  background:#0d0d0d;
+  border:1px solid var(--line);
+  border-radius:28px;
+  padding:12px
+}
+
+.tools{padding:8px}
+
+.tool{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:#aaa;
+  text-align:left;
+  padding:12px;
+  border-radius:12px;
+  cursor:pointer
+}
+
+.tool.active,.tool:hover{
+  background:rgba(255,106,0,.11);
+  color:#fff
+}
+
+.chat{
+  background:#111;
+  border:1px solid var(--line);
+  border-radius:21px;
+  min-height:430px;
+  padding:25px;
+  display:flex;
+  flex-direction:column
+}
+
+.chat-top{
+  display:flex;
+  justify-content:space-between;
+  color:#999;
+  font-size:12px
+}
+
+.bubble{
+  max-width:760px;
+  margin-top:auto;
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:#151515;
+  white-space:normal;
+  overflow-wrap:anywhere
+}
+
+.bubble strong{color:#ff9a59}
+
+.chatinput{
+  display:flex;
+  gap:8px;
+  margin-top:14px
+}
+
+.chatinput input{
+  flex:1;
+  background:#0a0a0a;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:13px;
+  color:#fff;
+  outline:0
+}
+
+.chatinput button{
+  border:0;
+  background:var(--orange);
+  border-radius:14px;
+  padding:0 18px;
+  font-weight:800;
+  cursor:pointer
+}
+
+.chatinput button:disabled,
+.searchbox button:disabled{
+  opacity:.55;
+  cursor:not-allowed
+}
+
+.feature{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px
+}
+
+.featurebox{
+  padding:30px;
+  border:1px solid var(--line);
+  border-radius:28px;
+  background:linear-gradient(145deg,#15110e,#0e0e0e)
+}
+
+.featurebox h3{
+  font-size:25px;
+  margin:0 0 10px
+}
+
+.featurebox p{color:#999}
+
+.chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:18px
+}
+
+.chip{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:8px 11px;
+  color:#c8c0ba;
+  font-size:12px
+}
+
+.cta{
+  text-align:center;
+  padding:80px 20px;
+  border:1px solid rgba(255,106,0,.22);
+  border-radius:30px;
+  background:
+    radial-gradient(circle at 50% 0,rgba(255,106,0,.12),transparent 45%),
+    #0e0e0e
+}
+
+.cta h2{
+  font-size:42px;
+  letter-spacing:-2px;
+  margin:0 0 10px
+}
+
+.cta p{
+  color:#999;
+  margin:0 auto 22px;
+  max-width:560px
+}
+
+footer{
+  padding:35px 0 55px;
+  color:#777;
+  font-size:12px;
+  display:flex;
+  justify-content:space-between;
+  border-top:1px solid var(--line)
+}
+
+#result{
+  display:none;
+  margin-top:12px;
+  padding:18px;
+  border:1px solid rgba(255,106,0,.25);
+  background:#111;
+  border-radius:18px;
+  color:#ddd;
+  white-space:normal;
+  overflow-wrap:anywhere
+}
+
+.loading{
+  color:#ff9a59;
+}
+
+.error{
+  color:#ff8b8b;
+}
+
+pre{
+  background:#080808;
+  padding:14px;
+  border-radius:12px;
+  overflow:auto;
+  border:1px solid var(--line);
+}
+
+code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+
+@media(max-width:850px){
+  .links{display:none}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .workspace{grid-template-columns:1fr}
+  .tools{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:5px
+  }
+  .tool{
+    font-size:11px;
+    text-align:center
+  }
+  .feature{grid-template-columns:1fr}
+  h1{letter-spacing:-3px}
+}
+
+@media(max-width:520px){
+  .grid{grid-template-columns:1fr}
+  .hero{padding-top:55px}
+  h1{font-size:52px}
+  .searchbox button{padding:0 12px}
+  .section-head{display:block}
+  .section-head p{margin-top:8px}
+  .tools{grid-template-columns:repeat(2,1fr)}
+  footer{display:block}
+}
 </style>
 </head>
+
 <body>
-<nav><div class="wrap nav"><a class="logo" href="#">Anu<span>Core</span></a><div class="links"><a href="#tools">iTools</a><a href="#workspace">AI Studio</a><a href="#learn">Learn</a><a href="#projects">Projects</a><a href="#languages">Languages</a></div><a class="navbtn" href="#workspace">Try AnuCore</a></div></nav>
 
-<header class="hero"><div class="orb"></div><div class="wrap">
-<div class="eyebrow"><i class="dot"></i> AI × COMPUTER SCIENCE</div>
-<h1>Think deeper.<br><span class="gradient">Build smarter.</span></h1>
-<p>AnuCore is a dreamy AI workspace for learning computer science, solving problems, debugging code, exploring concepts, and turning ideas into real projects.</p>
-<div class="hero-actions"><a class="primary" href="#workspace">Open AI Studio ↗</a><a class="ghost" href="#tools">Explore iTools</a></div>
-<div class="searchbox"><input id="search" placeholder="Ask AnuCore anything about AI, coding or CS…"><button onclick="ask()">Ask ↗</button></div><div id="result"></div>
-</div></header>
+<nav>
+  <div class="wrap nav">
+    <a class="logo" href="#">Anu<span>Core</span></a>
 
-<section id="tools"><div class="wrap"><div class="section-head"><div><h2>iTools, made useful.</h2><p>Small tools for the moments when you need a clear answer, a better explanation, or a faster way to build.</p></div></div>
-<div class="grid">
-<div class="card" onclick="selectTool('Explain')"><div class="icon">✦</div><h3>Explain</h3><p>Turn difficult CS ideas into simple mental models.</p></div>
-<div class="card" onclick="selectTool('Debug')"><div class="icon">⌘</div><h3>Debug</h3><p>Find bugs and understand why the code breaks.</p></div>
-<div class="card" onclick="selectTool('Generate')"><div class="icon">✧</div><h3>Generate</h3><p>Create code, ideas, prompts, notes and more.</p></div>
-<div class="card" onclick="selectTool('Study')"><div class="icon">◌</div><h3>Study</h3><p>Build focused study sessions and revision plans.</p></div>
-<div class="card" onclick="selectTool('Quiz')"><div class="icon">?</div><h3>Quiz</h3><p>Test yourself with adaptive-style questions.</p></div>
-<div class="card" onclick="selectTool('Concepts')"><div class="icon">∞</div><h3>Concepts</h3><p>Explore connected ideas across computer science.</p></div>
-<div class="card" onclick="selectTool('Projects')"><div class="icon">▣</div><h3>Projects</h3><p>Go from beginner experiments to portfolio builds.</p></div>
-<div class="card" onclick="selectTool('Interview')"><div class="icon">◈</div><h3>Interview</h3><p>Practice technical questions with clear feedback.</p></div>
-</div></div></section>
+    <div class="links">
+      <a href="#tools">iTools</a>
+      <a href="#workspace">AI Studio</a>
+      <a href="#learn">Learn</a>
+      <a href="#projects">Projects</a>
+      <a href="#languages">Languages</a>
+    </div>
 
-<section id="workspace"><div class="wrap"><div class="section-head"><div><h2>AI Studio</h2><p>A clean workspace where every tool opens into one focused flow.</p></div></div>
-<div class="workspace"><aside class="tools" id="toolList"><button class="tool active" onclick="selectTool('Ask AI')">✦ Ask AI</button><button class="tool" onclick="selectTool('Explain')">Explain</button><button class="tool" onclick="selectTool('Debug')">Debug</button><button class="tool" onclick="selectTool('Generate')">Generate</button><button class="tool" onclick="selectTool('Study')">Study</button><button class="tool" onclick="selectTool('Quiz')">Quiz</button><button class="tool" onclick="selectTool('Concepts')">Concepts</button><button class="tool" onclick="selectTool('Projects')">Projects</button></aside>
-<div class="chat"><div class="chat-top"><span id="mode">ASK AI</span><span>ANUCORE STUDIO</span></div><div class="bubble"><strong id="bubbleTitle">What are you working on?</strong><br><span id="bubbleText">Ask a question about code, AI, algorithms, systems, web development, or any CS concept. AnuCore will structure the answer clearly.</span></div><div class="chatinput"><input id="prompt" placeholder="Type your question…"><button onclick="send()">Run</button></div></div></div></div></section>
+    <a class="navbtn" href="#workspace">Try AnuCore</a>
+  </div>
+</nav>
 
-<section id="learn"><div class="wrap"><div class="feature"><div class="featurebox"><h3>Learn without the noise.</h3><p>Concept-first learning with definitions, intuition, examples, important points and next steps.</p><div class="chips">
-<span class="chip">C</span><span class="chip">C++</span><span class="chip">Java</span><span class="chip">Python</span>
-<span class="chip">JavaScript</span><span class="chip">TypeScript</span><span class="chip">C#</span><span class="chip">Go</span>
-<span class="chip">Rust</span><span class="chip">Kotlin</span><span class="chip">Swift</span><span class="chip">PHP</span>
-<span class="chip">Ruby</span><span class="chip">Dart</span><span class="chip">R</span><span class="chip">SQL</span>
-<span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">Bash</span><span class="chip">MATLAB</span>
-<span class="chip">Scala</span><span class="chip">Lua</span><span class="chip">Perl</span><span class="chip">DSA</span>
-<span class="chip">AI / ML</span><span class="chip">Web</span><span class="chip">Databases</span>
-</div></div><div class="featurebox" id="projects"><h3>Build your next thing.</h3><p>Project ideas designed to move from “I understand it” to “I built it.”</p><div class="chips"><span class="chip">AI apps</span><span class="chip">SaaS</span><span class="chip">Developer tools</span><span class="chip">Automation</span><span class="chip">Portfolio</span></div></div></div></div></section>
+<header class="hero">
+  <div class="orb"></div>
 
-<section id="languages"><div class="wrap">
-<div class="section-head"><div><h2>Programming languages.</h2><p>From first principles to production systems — learn the language that fits the problem.</p></div></div>
-<div class="grid">
-<div class="card" onclick="selectTool('C')"><div class="icon">C</div><h3>C</h3><p>Memory, pointers, structs, files and systems fundamentals.</p></div>
-<div class="card" onclick="selectTool('C++')"><div class="icon">C++</div><h3>C++</h3><p>OOP, STL, performance, templates and competitive programming.</p></div>
-<div class="card" onclick="selectTool('Java')"><div class="icon">J</div><h3>Java</h3><p>OOP, collections, JVM concepts and backend foundations.</p></div>
-<div class="card" onclick="selectTool('Python')"><div class="icon">Py</div><h3>Python</h3><p>Automation, scripting, data, AI and rapid application building.</p></div>
-<div class="card" onclick="selectTool('JavaScript')"><div class="icon">JS</div><h3>JavaScript</h3><p>Web apps, async programming, APIs and modern frontend.</p></div>
-<div class="card" onclick="selectTool('TypeScript')"><div class="icon">TS</div><h3>TypeScript</h3><p>Typed JavaScript for scalable applications and tooling.</p></div>
-<div class="card" onclick="selectTool('C#')"><div class="icon">C#</div><h3>C#</h3><p>.NET, desktop, web, cloud and game development foundations.</p></div>
-<div class="card" onclick="selectTool('Go')"><div class="icon">Go</div><h3>Go</h3><p>Simple, fast systems, APIs, concurrency and cloud services.</p></div>
-<div class="card" onclick="selectTool('Rust')"><div class="icon">Rs</div><h3>Rust</h3><p>Memory safety, ownership, systems and high-performance software.</p></div>
-<div class="card" onclick="selectTool('Kotlin')"><div class="icon">Kt</div><h3>Kotlin</h3><p>Modern JVM development and Android application building.</p></div>
-<div class="card" onclick="selectTool('Swift')"><div class="icon">Sw</div><h3>Swift</h3><p>Apple-platform development with modern language features.</p></div>
-<div class="card" onclick="selectTool('PHP')"><div class="icon">PHP</div><h3>PHP</h3><p>Web backends, APIs and server-side application development.</p></div>
-<div class="card" onclick="selectTool('Ruby')"><div class="icon">Rb</div><h3>Ruby</h3><p>Readable programming and productive web development.</p></div>
-<div class="card" onclick="selectTool('Dart')"><div class="icon">D</div><h3>Dart</h3><p>Cross-platform application development with Flutter.</p></div>
-<div class="card" onclick="selectTool('R')"><div class="icon">R</div><h3>R</h3><p>Statistics, data analysis and visualization.</p></div>
-<div class="card" onclick="selectTool('SQL')"><div class="icon">SQL</div><h3>SQL</h3><p>Queries, joins, indexes, schemas and database thinking.</p></div>
-<div class="card" onclick="selectTool('HTML')"><div class="icon">H</div><h3>HTML</h3><p>Semantic structure and the foundation of the web.</p></div>
-<div class="card" onclick="selectTool('CSS')"><div class="icon">CSS</div><h3>CSS</h3><p>Layouts, responsive design, animations and visual systems.</p></div>
-<div class="card" onclick="selectTool('Bash')"><div class="icon">$_</div><h3>Bash</h3><p>Command line, shell scripting and developer automation.</p></div>
-<div class="card" onclick="selectTool('MATLAB')"><div class="icon">M</div><h3>MATLAB</h3><p>Numerical computing, engineering and simulation workflows.</p></div>
-<div class="card" onclick="selectTool('Scala')"><div class="icon">Sc</div><h3>Scala</h3><p>Functional and object-oriented programming on the JVM.</p></div>
-<div class="card" onclick="selectTool('Lua')"><div class="icon">Lu</div><h3>Lua</h3><p>Lightweight scripting and embedded programming.</p></div>
-<div class="card" onclick="selectTool('Perl')"><div class="icon">Pl</div><h3>Perl</h3><p>Text processing, scripting and automation.</p></div>
-</div></div></section>
+  <div class="wrap">
 
-<section><div class="wrap"><div class="cta"><h2>Welcome to AnuCore.</h2><p>One calm place to search, learn, build and understand computer science with AI.</p><a class="primary" href="#workspace">Start exploring ↗</a></div></div></section>
+    <div class="eyebrow">
+      <i class="dot"></i>
+      AI × COMPUTER SCIENCE
+    </div>
 
-<footer class="wrap"><span>© 2026 AnuCore</span><span>AI × Computer Science · Built for curious minds</span></footer>
+    <h1>
+      Think deeper.<br>
+      <span class="gradient">Build smarter.</span>
+    </h1>
 
-<script>
-function selectTool(name){
- document.getElementById('mode').textContent=name.toUpperCase();
- document.getElementById('bubbleTitle').textContent=name==='Ask AI'?'What are you working on?':name+' mode is ready.';
- const desc={
- Explain:'Paste a concept or question and get a simple explanation, intuition, example and key points.',
- Debug:'Paste code and the error. The workspace will guide you through the bug and the fix.',
- Generate:'Describe what you want to build and turn the idea into a useful starting point.',
- Study:'Choose a topic and create a focused learning path with revision checkpoints.',
- Quiz:'Pick a topic and test your understanding with progressively harder questions.',
- Concepts:'Explore related concepts and see how they connect.',
- Projects:'Choose your level and get a practical project path with milestones.',
- Interview:'Practice technical questions and get concise improvement feedback.',
- C:'Learn C from variables and pointers to memory, structs, files and systems.',
- 'C++':'Learn C++ through OOP, STL, templates, algorithms and performance.',
- Java:'Learn Java through OOP, collections, JVM concepts and backend foundations.',
- Python:'Learn Python for programming fundamentals, automation, data and AI.',
- JavaScript:'Learn JavaScript for the browser, Node.js, async code and APIs.',
- TypeScript:'Learn TypeScript for typed, scalable JavaScript applications.',
- 'C#':'Learn C# and .NET for applications, web services and game development.',
- Go:'Learn Go for APIs, concurrency, cloud and systems programming.',
- Rust:'Learn Rust through ownership, borrowing, safety and systems programming.',
- Kotlin:'Learn Kotlin for modern JVM and Android development.',
- Swift:'Learn Swift for modern Apple-platform applications.',
- PHP:'Learn PHP for server-side web development and APIs.',
- Ruby:'Learn Ruby for readable programming and productive web apps.',
- Dart:'Learn Dart and its role in cross-platform Flutter development.',
- R:'Learn R for statistics, data analysis and visualization.',
- SQL:'Learn SQL through queries, joins, aggregation, indexes and database design.',
- HTML:'Learn HTML through semantic structure and accessible web foundations.',
- CSS:'Learn CSS through layout, responsive design, animation and styling.',
- Bash:'Learn Bash for command-line workflows, scripting and automation.',
- MATLAB:'Learn MATLAB for numerical computing, engineering and simulation.',
- Scala:'Learn Scala through JVM programming and functional concepts.',
- Lua:'Learn Lua for lightweight scripting and embedded applications.',
- Perl:'Learn Perl for scripting and powerful text processing.'
- };
- document.getElementById('bubbleText').textContent=desc[name]||desc.Explain;
- document.querySelectorAll('.tool').forEach(x=>x.classList.toggle('active',x.textContent.trim().includes(name)));
- document.getElementById('workspace').scrollIntoView({behavior:'smooth',block:'center'});
-}
-  async function send(){
-  const v = document.getElementById('prompt').value.trim();
-  if (!v) return;
+    <p>
+      AnuCore is a dreamy AI workspace for learning computer science,
+      solving problems, debugging code, exploring concepts,
+      and turning ideas into real projects.
+    </p>
 
-  const bubbleTitle = document.getElementById('bubbleTitle');
-  const bubbleText = document.getElementById('bubbleText');
+    <div class="hero-actions">
+      <a class="primary" href="#workspace">Open AI Studio ↗</a>
+      <a class="ghost" href="#tools">Explore iTools</a>
+    </div>
 
-  bubbleTitle.textContent = 'AnuCore AI';
-  bubbleText.innerHTML = 'Thinking...';
+    <div class="searchbox">
+      <input
+        id="search"
+        placeholder="Ask AnuCore anything about AI, coding or CS…"
+        onkeydown="if(event.key==='Enter') ask()"
+      >
+      <button id="askButton" onclick="ask()">Ask ↗</button>
+    </div>
 
-  try {
-    const response = await fetch('/api/chat', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        prompt: v,
-        tool: 'ASK AI'
-      })
-    });
+    <div id="result"></div>
 
-    const data = await response.json();
+  </div>
+</header>
 
-    if (!response.ok) {
-      throw new Error(data.error || 'AI request failed.');
-    }
+<section id="tools">
+  <div class="wrap">
 
-    bubbleText.innerHTML = data.answer
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/\n/g, '<br>');
-  } catch (error) {
-    bubbleText.innerHTML =
-      '<b>Error:</b> ' + error.message;
-  }
-  }
-function ask(){
- const v=document.getElementById('search').value.trim();if(!v)return;
- const r=document.getElementById('result');r.style.display='block';r.innerHTML='<b>Search ready.</b><br>“'+v+'” has been sent to the AnuCore workspace. This v4 front end is interactive; live AI/web answers require a backend connection.';
-}
-</script>
-</body></html>
+    <div class="section-head">
+      <div>
+        <h2>iTools, made useful.</h2>
+        <p>
+          Small tools for the moments when you need a clear answer,
+          a better explanation, or a faster way to build.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid">
+
+      <div class="card" onclick="selectTool('Explain')">
+        <div class="icon">✦</div>
+        <h3>Explain</h3>
+        <p>Turn difficult CS ideas into simple mental models.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('Debug')">
+        <div class="icon">⌘</div>
+        <h3>Debug</h3>
+        <p>Find bugs and understand why the code breaks.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('Generate')">
+        <div class="icon">✧</div>
+        <h3>Generate</h3>
+        <p>Create code, ideas, prompts, notes and more.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('Study')">
+        <div class="icon">◌</div>
+        <h3>Study</h3>
+        <p>Build focused study sessions and revision plans.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('Quiz')">
+        <div class="icon">?</div>
+        <h3>Quiz</h3>
+        <p>Test yourself with adaptive-style questions.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('Concepts')">
+        <div class="icon">∞</div>
+        <h3>Concepts</h3>
+        <p>Explore connected ideas across computer science.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('Projects')">
+        <div class="icon">▣</div>
+        <h3>Projects</h3>
+        <p>Go from beginner experiments to portfolio builds.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('Interview')">
+        <div class="icon">◈</div>
+        <h3>Interview</h3>
+        <p>Practice technical questions with clear feedback.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="workspace">
+  <div class="wrap">
+
+    <div class="section-head">
+      <div>
+        <h2>AI Studio</h2>
+        <p>
+          A clean workspace where every tool opens into one focused flow.
+        </p>
+      </div>
+    </div>
+
+    <div class="workspace">
+
+      <aside class="tools" id="toolList">
+
+        <button class="tool active" onclick="selectTool('Ask AI')">
+          ✦ Ask AI
+        </button>
+
+        <button class="tool" onclick="selectTool('Explain')">
+          Explain
+        </button>
+
+        <button class="tool" onclick="selectTool('Debug')">
+          Debug
+        </button>
+
+        <button class="tool" onclick="selectTool('Generate')">
+          Generate
+        </button>
+
+        <button class="tool" onclick="selectTool('Study')">
+          Study
+        </button>
+
+        <button class="tool" onclick="selectTool('Quiz')">
+          Quiz
+        </button>
+
+        <button class="tool" onclick="selectTool('Concepts')">
+          Concepts
+        </button>
+
+        <button class="tool" onclick="selectTool('Projects')">
+          Projects
+        </button>
+
+      </aside>
+
+      <div class="chat">
+
+        <div class="chat-top">
+          <span id="mode">ASK AI</span>
+          <span>ANUCORE STUDIO</span>
+        </div>
+
+        <div class="bubble">
+
+          <strong id="bubbleTitle">
+            What are you working on?
+          </strong>
+
+          <br>
+
+          <span id="bubbleText">
+            Ask a question about code, AI, algorithms, systems,
+            web development, or any CS concept.
+            AnuCore will structure the answer clearly.
+          </span>
+
+        </div>
+
+        <div class="chatinput">
+
+          <input
+            id="prompt"
+            placeholder="Type your question…"
+            onkeydown="if(event.key==='Enter') send()"
+          >
+
+          <button id="runButton" onclick="send()">
+            Run
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="learn">
+  <div class="wrap">
+
+    <div class="feature">
+
+      <div class="featurebox">
+
+        <h3>Learn without the noise.</h3>
+
+        <p>
+          Concept-first learning with definitions,
+          intuition, examples, important points and next steps.
+        </p>
+
+        <div class="chips">
+          <span class="chip">C</span>
+          <span class="chip">C++</span>
+          <span class="chip">Java</span>
+          <span class="chip">Python</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">TypeScript</span>
+          <span class="chip">C#</span>
+          <span class="chip">Go</span>
+          <span class="chip">Rust</span>
+          <span class="chip">Kotlin</span>
+          <span class="chip">Swift</span>
+          <span class="chip">PHP</span>
+          <span class="chip">Ruby</span>
+          <span class="chip">Dart</span>
+          <span class="chip">R</span>
+          <span class="chip">SQL</span>
+          <span class="chip">HTML</span>
+          <span class="chip">CSS</span>
+          <span class="chip">Bash</span>
+          <span class="chip">MATLAB</span>
+          <span class="chip">Scala</span>
+          <span class="chip">Lua</span>
+          <span class="chip">Perl</span>
+          <span class="chip">DSA</span>
+          <span class="chip">AI / ML</span>
+          <span class="chip">Web</span>
+          <span class="chip">Databases</span>
+        </div>
+
+      </div>
+
+      <div class="featurebox" id="projects">
+
+        <h3>Build your next thing.</h3>
+
+        <p>
+          Project ideas designed to move from
+          “I understand it” to “I built it.”
+        </p>
+
+        <div class="chips">
+          <span class="chip">AI apps</span>
+          <span class="chip">SaaS</span>
+          <span class="chip">Developer tools</span>
+          <span class="chip">Automation</span>
+          <span class="chip">Portfolio</span>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="languages">
+
+  <div class="wrap">
+
+    <div class="section-head">
+
+      <div>
+        <h2>Programming languages.</h2>
+
+        <p>
+          From first principles to production systems —
+          learn the language that fits the problem.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="grid">
+
+      <div class="card" onclick="selectTool('C')">
+        <div class="icon">C</div>
+        <h3>C</h3>
+        <p>Memory, pointers, structs, files and systems fundamentals.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('C++')">
+        <div class="icon">C++</div>
+        <h3>C++</h3>
+        <p>OOP, STL, performance, templates and competitive programming.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('Java')">
+        <div class="icon">J</div>
+        <h3>Java</h3>
+        <p>OOP, collections, JVM concepts and backend foundations.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('Python')">
+        <div class="icon">Py</div>
+        <h3>Python</h3>
+        <p>Automation, scripting, data, AI and rapid application building.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('JavaScript')">
+        <div class="icon">JS</div>
+        <h3>JavaScript</h3>
+        <p>Web apps, async programming, APIs and modern frontend.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('TypeScript')">
+        <div class="icon">TS</div>
+        <h3>TypeScript</h3>
+        <p>Typed JavaScript for scalable applications and tooling.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('C#')">
+        <div class="icon">C#</div>
+        <h3>C#</h3>
+        <p>.NET, desktop, web, cloud and game development foundations.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('Go')">
+        <div class="icon">Go</div>
+        <h3>Go</h3>
+        <p>Simple, fast systems, APIs, concurrency and cloud services.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('Rust')">
+        <div class="icon">Rs</div>
+        <h3>Rust</h3>
+        <p>Memory safety, ownership, systems and high-performance software.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('Kotlin')">
+        <div class="icon">Kt</div>
+        <h3>Kotlin</h3>
+        <p>Modern JVM development and Android application building.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('Swift')">
+        <div class="icon">Sw</div>
+        <h3>Swift</h3>
+        <p>Apple-platform development with modern language features.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('PHP')">
+        <div class="icon">PHP</div>
+        <h3>PHP</h3>
+        <p>Web backends, APIs and server-side application development.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('Ruby')">
+        <div class="icon">Rb</div>
+        <h3>Ruby</h3>
+        <p>Readable programming and productive web development.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('Dart')">
+        <div class="icon">D</div>
+        <h3>Dart</h3>
+        <p>Cross-platform application development with Flutter.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('R')">
+        <div class="icon">R</div>
+        <h3>R</h3>
+        <p>Statistics, data analysis and visualization.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('SQL')">
+        <div class="icon">SQL</div>
+        <h3>SQL</h3>
+        <p>Queries, joins, indexes, schemas and database thinking.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('HTML')">
+        <div class="icon">H</div>
+        <h3>HTML</h3>
+        <p>Semantic structure and the foundation of the web.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('CSS')">
+        <div class="icon">CSS</div>
+        <h3>CSS</h3>
+        <p>Layouts, responsive design, animations and visual systems.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('Bash')">
+        <div class="icon">$_</div>
+        <h3>Bash</h3>
+        <p>Command line, shell scripting and developer automation.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('MATLAB')">
+        <div class="icon">M</div>
+        <h3>MATLAB</h3>
+        <p>Numerical computing, engineering and simulation workflows.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('Scala')">
+        <div class="icon">Sc</div>
+        <h3>Scala</h3>
+        <p>Functional and object-oriented programming on the JVM.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('Lua')">
+        <div class="icon">Lu</div>
+        <h3>Lua</h3>
+        <p>Lightweight scripting and embedded programming.</p>
+      </div>
+
+      <div class="card" onclick="selectTool('Perl')">
+        <div class="icon">Pl</div>
+        <h3>Perl</h3>
+        <p>Text processing, scripting and automation.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+
+  <div class="wrap">
+
+    <div class="cta">
+
+      <h2>Welcome to AnuCore.</h2>
+
+      <p>
+        One calm place to s
