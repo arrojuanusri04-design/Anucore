@@ -163,11 +163,44 @@ function selectTool(name){
  document.querySelectorAll('.tool').forEach(x=>x.classList.toggle('active',x.textContent.trim().includes(name)));
  document.getElementById('workspace').scrollIntoView({behavior:'smooth',block:'center'});
 }
-function send(){
- const v=document.getElementById('prompt').value.trim(); if(!v)return;
- document.getElementById('bubbleTitle').textContent='Clear answer';
- document.getElementById('bubbleText').innerHTML='<b>Your question:</b> '+v+'<br><br><b>AnuCore prototype:</b> This interface is ready for a real AI backend. Connect an AI API to return live answers, explanations, code help and web-grounded results.';
-}
+  async function send(){
+  const v = document.getElementById('prompt').value.trim();
+  if (!v) return;
+
+  const bubbleTitle = document.getElementById('bubbleTitle');
+  const bubbleText = document.getElementById('bubbleText');
+
+  bubbleTitle.textContent = 'AnuCore AI';
+  bubbleText.innerHTML = 'Thinking...';
+
+  try {
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        prompt: v,
+        tool: 'ASK AI'
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || 'AI request failed.');
+    }
+
+    bubbleText.innerHTML = data.answer
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/\n/g, '<br>');
+  } catch (error) {
+    bubbleText.innerHTML =
+      '<b>Error:</b> ' + error.message;
+  }
+  }
 function ask(){
  const v=document.getElementById('search').value.trim();if(!v)return;
  const r=document.getElementById('result');r.style.display='block';r.innerHTML='<b>Search ready.</b><br>“'+v+'” has been sent to the AnuCore workspace. This v4 front end is interactive; live AI/web answers require a backend connection.';
